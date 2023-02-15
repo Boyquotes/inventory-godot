@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnxyoo21me744"]
+
+[ext_resource type="Texture2D" uid="uid://b83fmqu2thwn5" path="res://assets/textures/items/sword.svg" id="1_r0rd8"]
+[ext_resource type="Script" path="res://src/scenes/ui/inventory/UIItem.cs" id="1_sxip6"]
+
+[node name="UIItem" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchor_right = 0.0555556
+anchor_bottom = 0.0987654
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_sxip6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 0.0625
+anchor_top = 0.0625
+anchor_right = 0.9375
+anchor_bottom = 0.9375
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.749999
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r0rd8")
+metadata/_edit_use_anchors_ = true

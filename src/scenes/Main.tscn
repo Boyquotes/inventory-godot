@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://jwhbobf1od6p"]
+[gd_scene load_steps=4 format=3 uid="uid://jwhbobf1od6p"]
 
 [ext_resource type="Script" path="res://src/scenes/Main.cs" id="1_yt1lm"]
+[ext_resource type="Script" path="res://src/controllers/InventoryController.cs" id="2_fv657"]
+[ext_resource type="PackedScene" uid="uid://uhehc4rhpl66" path="res://src/scenes/ui/UI.tscn" id="2_pmach"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yt1lm")
+
+[node name="Controllers" type="Node" parent="."]
+
+[node name="InventoryController" type="Node" parent="Controllers"]
+script = ExtResource("2_fv657")
+
+[node name="UI" parent="." instance=ExtResource("2_pmach")]
