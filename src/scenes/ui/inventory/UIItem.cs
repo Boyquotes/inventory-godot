@@ -30,6 +30,27 @@ public partial class UIItem : Control
         }
     }
 
+    public override bool _CanDropData(Vector2 atPosition, Variant data)
+    {
+        // allow anything to drop
+        return true;
+    }
+
+    public override void _DropData(Vector2 atPosition, Variant data)
+    {
+        // swap dragged ui item with this ui item
+        UIItem uiItem = (UIItem)data;
+        Item uiItemItem = uiItem.Item;
+        uiItem.Item = Item;
+        Item = uiItemItem;
+    }
+
+    public override Variant _GetDragData(Vector2 atPosition)
+    {
+        // return this as data
+        return this;
+    }
+
     private void setItem(Item item)
     {
         _item = item;
@@ -42,6 +63,12 @@ public partial class UIItem : Control
 
     private void refreshItem()
     {
+        if (Item == null)
+        {
+            _iconTextureRect.Texture = null;
+            return;
+        }
+
         _iconTextureRect.Texture = Item.Texture;
     }
 
