@@ -10,12 +10,11 @@ public partial class UIInventory : Control
 
     private GridContainer _itemsGridContainer;
     private Inventory _inventory;
-    private PackedScene _uiItem;
+    private PackedScene _uiItem = ResourceLoader.Load<PackedScene>("res://src/scenes/ui/inventory/UIItem.tscn");
 
     public override void _Ready()
     {
         _itemsGridContainer = GetNode<GridContainer>("Items");
-        _uiItem = ResourceLoader.Load<PackedScene>("res://src/scenes/ui/inventory/UIItem.tscn");
     }
 
     private void setInventory(Inventory inventory)
@@ -32,7 +31,12 @@ public partial class UIInventory : Control
         foreach (Item item in Inventory.Items)
         {
             UIItem uiItem = _uiItem.Instantiate<UIItem>();
-            uiItem.Item = item;
+
+            if (item != null)
+            {
+                uiItem.Item = item;
+            }
+
             _itemsGridContainer.AddChild(uiItem);
         }
     }

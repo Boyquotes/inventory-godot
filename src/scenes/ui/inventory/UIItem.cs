@@ -19,18 +19,30 @@ public partial class UIItem : Control
         MouseExited += onMouseExited;
 
         _iconTextureRect = GetNode<TextureRect>("Icon");
+        _iconTextureRect.Texture = null;
+
         _selectTextureRect = GetNode<TextureRect>("Select");
         _selectTextureRect.Visible = false;
 
         if (Item != null)
         {
-            _iconTextureRect.Texture = Item.Texture;
+            refreshItem();
         }
     }
 
     private void setItem(Item item)
     {
         _item = item;
+
+        if (IsInsideTree())
+        {
+            refreshItem();
+        }
+    }
+
+    private void refreshItem()
+    {
+        _iconTextureRect.Texture = Item.Texture;
     }
 
     private void onMouseEntered()

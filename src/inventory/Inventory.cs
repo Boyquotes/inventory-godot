@@ -12,12 +12,28 @@ public partial class Inventory : Resource
     [Export]
     public Array<Item> Items = new Array<Item>();
 
-    public void AddItem(Item item) {
+    [Export]
+    public int Limit;
+
+    public void Init()
+    {
+        // add null items until inventory limit is reached
+        int inventoryBuffer = Limit - Items.Count;
+
+        for (int i = 0; i < inventoryBuffer; i++)
+        {
+            AddItem(null);
+        }
+    }
+
+    public void AddItem(Item item)
+    {
         Items.Add(item);
         EmitSignal("ItemAdded", item);
     }
 
-    public void RemoveItem(Item item) {
+    public void RemoveItem(Item item)
+    {
         Items.Remove(item);
         EmitSignal("ItemRemoved", item);
     }
