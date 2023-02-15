@@ -9,7 +9,7 @@ public partial class Main : Node
 
         foreach (Controller controller in GetNode("Controllers").GetChildren())
         {
-            GD.Print(String.Format("{0} Run", controller.Name));
+            GD.Print($"{controller.Name} Run");
             controller.Run();
         }
     }
