@@ -2,6 +2,9 @@ using Godot;
 
 public partial class UIItem : Control
 {
+    [Signal]
+    public delegate void MovedEventHandler(UIItem uiItem);
+
     public Item Item
     {
         get { return _item; }
@@ -38,11 +41,21 @@ public partial class UIItem : Control
 
     public override void _DropData(Vector2 atPosition, Variant data)
     {
-        // swap dragged ui item with this ui item
         UIItem uiItem = (UIItem)data;
         Item uiItemItem = uiItem.Item;
+
+        // prevent moving ui item with null item or onto same position
+        if (uiItemItem == null || uiItemItem == Item)
+        {
+            return;
+        }
+
+        // swap dragged ui item with this ui item
         uiItem.Item = Item;
         Item = uiItemItem;
+
+        // emit moved signal after updating items
+        EmitSignal("Moved", this);
     }
 
     public override Variant _GetDragData(Vector2 atPosition)
@@ -65,10 +78,12 @@ public partial class UIItem : Control
     {
         if (Item == null)
         {
+            MouseDefaultCursorShape = CursorShape.Arrow;
             _iconTextureRect.Texture = null;
             return;
         }
 
+        MouseDefaultCursorShape = CursorShape.PointingHand;
         _iconTextureRect.Texture = Item.Texture;
     }
 

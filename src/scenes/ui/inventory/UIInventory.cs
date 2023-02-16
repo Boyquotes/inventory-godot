@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class UIInventory : Control
 {
@@ -31,6 +32,7 @@ public partial class UIInventory : Control
         foreach (Item item in Inventory.Items)
         {
             UIItem uiItem = _uiItem.Instantiate<UIItem>();
+            uiItem.Moved += onUIItemMoved;
 
             if (item != null)
             {
@@ -39,5 +41,18 @@ public partial class UIInventory : Control
 
             _itemsGridContainer.AddChild(uiItem);
         }
+    }
+
+    private void onUIItemMoved(UIItem uiItem)
+    {
+        // swap moved item with moved onto item in inventory
+        int itemMovedIndex = Inventory.Items.IndexOf(uiItem.Item);
+        int itemMovedOntoIndex = _itemsGridContainer.GetChildren().IndexOf(uiItem);
+
+        Item itemMoved = Inventory.Items[itemMovedIndex];
+        Item itemMovedOnto = Inventory.Items[itemMovedOntoIndex];
+
+        Inventory.Items[itemMovedOntoIndex] = itemMoved;
+        Inventory.Items[itemMovedIndex] = itemMovedOnto;
     }
 }
