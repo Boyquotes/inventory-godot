@@ -17,13 +17,7 @@ public partial class Inventory : Resource
 
     public void Init()
     {
-        // add null items until inventory limit is reached
-        int inventoryBuffer = Limit - Items.Count;
-
-        for (int i = 0; i < inventoryBuffer; i++)
-        {
-            AddItem(null);
-        }
+        Items.Resize(Limit);
     }
 
     public void AddItem(Item item)
