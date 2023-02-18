@@ -3,6 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bu5cp38bv40fl" path="res://src/scenes/ui/inventory/UIInventory.tscn" id="1_vd1rv"]
 
 [node name="UI" type="CanvasLayer"]
-follow_viewport_enabled = true
 
 [node name="UIInventory" parent="." instance=ExtResource("1_vd1rv")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
