@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dhl3rytajxev1"]
+
+[ext_resource type="Script" path="res://src/inventory/Rarity.cs" id="1_roe3r"]
+
+[resource]
+script = ExtResource("1_roe3r")
+Name = "Common"
+Color = Color(1, 1, 1, 1)

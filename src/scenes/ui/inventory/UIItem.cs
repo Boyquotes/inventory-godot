@@ -84,6 +84,7 @@ public partial class UIItem : Control
         }
 
         MouseDefaultCursorShape = CursorShape.PointingHand;
+        _iconTextureRect.Modulate = Item.Rarity.Color;
         _iconTextureRect.Texture = Item.Texture;
     }
 

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cc2gpyr4r16wy"]
+
+[ext_resource type="Script" path="res://src/inventory/Rarity.cs" id="1_llsqt"]
+
+[resource]
+script = ExtResource("1_llsqt")
+Name = "Epic"
+Color = Color(0.701961, 0.580392, 0.980392, 1)
