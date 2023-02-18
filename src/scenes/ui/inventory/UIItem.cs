@@ -5,27 +5,42 @@ public partial class UIItem : Control
     [Signal]
     public delegate void MovedEventHandler(UIItem uiItem);
 
+    [Signal]
+    public delegate void SelectedEventHandler(UIItem uiItem);
+
     public Item Item
     {
         get { return _item; }
         set { setItem(value); }
     }
 
+    public bool IsSelected
+    {
+        get { return _isSelected; }
+        set { setIsSelected(value); }
+    }
+
+    private bool _isSelected;
     private Item _item;
     private TextureRect _iconTextureRect;
     private TextureRect _selectTextureRect;
+    private TextureRect _selectedTextureRect;
 
     public override void _Ready()
     {
         // signals
         MouseEntered += onMouseEntered;
         MouseExited += onMouseExited;
+        GuiInput += onGUIInput;
 
         _iconTextureRect = GetNode<TextureRect>("Icon");
         _iconTextureRect.Texture = null;
 
         _selectTextureRect = GetNode<TextureRect>("Select");
         _selectTextureRect.Visible = false;
+
+        _selectedTextureRect = GetNode<TextureRect>("Selected");
+        _selectedTextureRect.Visible = false;
 
         if (Item != null)
         {
@@ -54,7 +69,8 @@ public partial class UIItem : Control
         uiItem.Item = Item;
         Item = uiItemItem;
 
-        // emit moved signal after updating items
+        // emit moved and selected signal after updating items
+        EmitSignal("Selected", this);
         EmitSignal("Moved", this);
     }
 
@@ -72,6 +88,12 @@ public partial class UIItem : Control
         {
             refreshItem();
         }
+    }
+
+    private void setIsSelected(bool isSelected)
+    {
+        _isSelected = isSelected;
+        _selectedTextureRect.Visible = IsSelected;
     }
 
     private void refreshItem()
@@ -96,5 +118,13 @@ public partial class UIItem : Control
     private void onMouseExited()
     {
         _selectTextureRect.Visible = false;
+    }
+
+    private void onGUIInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("PrimaryAction"))
+        {
+            EmitSignal("Selected", this);
+        }
     }
 }
