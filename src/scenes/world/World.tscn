@@ -9,6 +9,8 @@ size = Vector2(1152, 32)
 [node name="World" type="Node2D"]
 
 [node name="Character" parent="." instance=ExtResource("1_2768e")]
+Speed = null
+JumpVelocity = null
 
 [node name="Floor" type="Node2D" parent="."]
 position = Vector2(0, 48)
