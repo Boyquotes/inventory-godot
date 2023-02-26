@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu5cp38bv40fl"]
+[gd_scene load_steps=5 format=3 uid="uid://bu5cp38bv40fl"]
 
 [ext_resource type="Script" path="res://src/scenes/ui/inventory/UIInventory.cs" id="1_2vgln"]
 [ext_resource type="PackedScene" uid="uid://bnxyoo21me744" path="res://src/scenes/ui/inventory/UIItem.tscn" id="1_sk6bv"]
 [ext_resource type="PackedScene" uid="uid://dclbeaeenyu25" path="res://src/scenes/ui/inventory/ItemInfo.tscn" id="2_cffdp"]
+[ext_resource type="PackedScene" uid="uid://cu5m2lyi17aef" path="res://src/scenes/ui/inventory/ItemDropArea.tscn" id="4_t1wfa"]
 
 [node name="UIInventory" type="Control"]
 layout_mode = 3
@@ -13,20 +14,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2vgln")
 
+[node name="ItemDropArea" parent="." instance=ExtResource("4_t1wfa")]
+layout_mode = 1
+anchor_left = 0.166667
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ItemInfo" parent="." instance=ExtResource("2_cffdp")]
 layout_mode = 1
-anchor_left = 0.0277778
-anchor_top = 0.358025
-anchor_right = 0.194444
-anchor_bottom = 0.45679
+anchor_top = 0.296296
+anchor_bottom = 0.395061
 
 [node name="Items" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0277778
-anchor_top = 0.0493827
-anchor_right = 0.028
-anchor_bottom = 0.0493827
+anchor_right = 0.000222193
 offset_right = 191.743
 offset_bottom = 192.0
 grow_horizontal = 2

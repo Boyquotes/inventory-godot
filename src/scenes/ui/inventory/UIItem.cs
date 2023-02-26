@@ -3,6 +3,9 @@ using Godot;
 public partial class UIItem : Control
 {
     [Signal]
+    public delegate void DroppedEventHandler(UIItem uiItem);
+
+    [Signal]
     public delegate void MovedEventHandler(UIItem uiItem);
 
     [Signal]

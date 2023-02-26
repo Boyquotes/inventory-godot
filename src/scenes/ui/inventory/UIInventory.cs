@@ -26,17 +26,25 @@ public partial class UIInventory : Control
     {
         _inventory = inventory;
 
+        // connect signals
+        Inventory.ItemAdded += onInventoryUpdated;
+        Inventory.ItemRemoved += onInventoryUpdated;
+
         // remove all ui items
         foreach (Node child in _itemsGridContainer.GetChildren())
         {
             child.QueueFree();
         }
+
         // add ui items using inventory items
         foreach (Item item in Inventory.Items)
         {
             UIItem uiItem = _uiItem.Instantiate<UIItem>();
+
+            // connect signals
             uiItem.Moved += onUIItemMoved;
             uiItem.Selected += onUIItemSelected;
+            uiItem.Dropped += onUIItemDropped;
 
             if (item != null)
             {
@@ -45,6 +53,34 @@ public partial class UIInventory : Control
 
             _itemsGridContainer.AddChild(uiItem);
         }
+    }
+
+    private void onInventoryUpdated(Item item)
+    {
+        int inventoryIndex = Inventory.Items.IndexOf(item);
+
+        // item removed
+        if (inventoryIndex == -1)
+        {
+            foreach (UIItem child in _itemsGridContainer.GetChildren())
+            {
+                if (child.Item != item)
+                {
+                    continue;
+                }
+
+                _itemInfo.Visible = false;
+                _selectedUIItem = null;
+                child.IsSelected = false;
+                child.Item = null;
+                break;
+            }
+
+            return;
+        }
+
+        UIItem uiItem = _itemsGridContainer.GetChild<UIItem>(inventoryIndex);
+        uiItem.Item = item;
     }
 
     private void onUIItemMoved(UIItem uiItem)
@@ -88,5 +124,10 @@ public partial class UIInventory : Control
         _selectedUIItem.IsSelected = true;
         _itemInfo.Item = _selectedUIItem.Item;
         _itemInfo.Visible = true;
+    }
+
+    private void onUIItemDropped(UIItem uiItem)
+    {
+        Inventory.RemoveItem(uiItem.Item);
     }
 }

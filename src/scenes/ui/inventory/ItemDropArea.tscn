@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu5m2lyi17aef"]
+
+[ext_resource type="Script" path="res://src/scenes/ui/inventory/ItemDropArea.cs" id="1_kq7f2"]
+
+[node name="ItemDropArea" type="Control"]
+layout_mode = 3
+anchor_right = 0.0555556
+anchor_bottom = 0.0987654
+script = ExtResource("1_kq7f2")
+metadata/_edit_use_anchors_ = true

@@ -22,13 +22,23 @@ public partial class Inventory : Resource
 
     public void AddItem(Item item)
     {
-        Items.Add(item);
+        int index = Items.IndexOf(null);
+
+        if (index == -1)
+        {
+            GD.Print("Inventory is full");
+            return;
+        }
+
+        Items[index] = item;
         EmitSignal("ItemAdded", item);
     }
 
     public void RemoveItem(Item item)
     {
-        Items.Remove(item);
+        int index = Items.IndexOf(item);
+        Items[index] = null;
+
         EmitSignal("ItemRemoved", item);
     }
 }

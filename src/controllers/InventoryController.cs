@@ -3,7 +3,7 @@ using System;
 
 public partial class InventoryController : Controller
 {
-    private Inventory Inventory = ResourceLoader.Load<Inventory>("data/player_inventory.tres");
+    public Inventory Inventory = ResourceLoader.Load<Inventory>("data/player_inventory.tres");
 
     public override void Run()
     {
